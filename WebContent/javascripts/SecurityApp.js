@@ -12,7 +12,7 @@ app.config(function($stateProvider, $urlRouterProvider){
       .state('home', {
           url: "/home",
           templateUrl: "templates/home.html",
-			controller: "Home", resolve: {
+			controller: "HomeController", resolve: {
 	            auth: function ($q, authenticationSvc) {
 	                var userInfo = authenticationSvc.getUserInfo();
 	                if (userInfo) {
@@ -23,7 +23,7 @@ app.config(function($stateProvider, $urlRouterProvider){
 	            }
 	        }
       })
-		.state('partner', {
+		.state('home.partner', {
           url: "/partner",
           templateUrl: "templates/partners.html",
 			controller: "PartnerListController", resolve: {
@@ -37,7 +37,7 @@ app.config(function($stateProvider, $urlRouterProvider){
 	            }
 	        }
       })
-		.state('issuer', {
+		.state('home.issuer', {
           url: "/issuer",
           templateUrl: "templates/issuers.html",
 			controller: "IssuerController", resolve: {
@@ -51,7 +51,7 @@ app.config(function($stateProvider, $urlRouterProvider){
 	            }
 	        }
       })
-      .state('account', {
+      .state('home.account', {
           url: "/account",
           templateUrl: "templates/accounts.html" , resolve: {
               auth: function ($q, authenticationSvc) {
@@ -64,13 +64,13 @@ app.config(function($stateProvider, $urlRouterProvider){
               }
           }
       })
-        .state('account.list', {
+        .state('home.account.list', {
             url: "/list",
             templateUrl: "templates/account.list.html",
             controller: "AccountController"
         })
         
-      .state('report', {
+      .state('home.report', {
           url: "/report",
           templateUrl: "templates/reports.html", resolve: {
               auth: function ($q, authenticationSvc) {
@@ -83,19 +83,19 @@ app.config(function($stateProvider, $urlRouterProvider){
               }
           }
       })
-        .state('report.report1', {
+        .state('home.report.report1', {
             url: "/report",
             templateUrl: "templates/report.report1.html",
             controller: "Report1Controller"
         })
-		  .state('report.report2', {
+		  .state('home.report.report2', {
             url: "/report",
             templateUrl: "templates/report.report2.html",
             controller: function($scope){
               $scope.stuffs = ["some", "other", "list", "Of", "stuff"];
             }
         })
-		  .state('report.report3', {
+		  .state('home.report.report3', {
             url: "/report",
             templateUrl: "templates/report.report3.html",
             controller: function($scope){
@@ -103,7 +103,6 @@ app.config(function($stateProvider, $urlRouterProvider){
             }
         })
   })
-
 
 
 
@@ -190,6 +189,13 @@ app.run(["$rootScope", "$location", function ($rootScope, $location) {
         }
     });
 }]);
+app.config(function($sceDelegateProvider){ $sceDelegateProvider.resourceUrlWhitelist([
+                                                                                      // Allow same origin resource loads.
+                                                                                      'self',
+                                                                                      // Allow loading from our assets domain.  Notice the difference between * and **.
+                                                                                      'http://localhost:3000/api/**'
+                                                                                    ]);
+});
 
 app.factory("authenticationSvc", ["$http","$q","$window",function ($http, $q, $window) {
     var userInfo;
@@ -214,14 +220,17 @@ app.factory("authenticationSvc", ["$http","$q","$window",function ($http, $q, $w
 
     function logout() {
         var deferred = $q.defer();
-
-        $http({
-            method: "POST",
-            url: "http://localhost:3000/api/logout",
-            headers: {
-                "access_token": userInfo.accessToken
-            }
-        }).then(function (result) {
+        $http.post("http://localhost:3000/api/logout", { access_token: userInfo.accessToken, userName: userInfo.userName })
+        .then(function (result)
+        //$http({
+          //  method: "POST",
+           // url: "http://localhost:3000/api/logout",
+           // headers: {
+             //   "access_token": userInfo.accessToken
+                
+           // }
+        //}).then(function (result) 
+        		{
             userInfo = null;
             $window.sessionStorage["userInfo"] = null;
             deferred.resolve(result);
@@ -270,23 +279,28 @@ app.controller("LoginController", ["$scope", "$location", "$window", "authentica
 }]);
 
 app.controller("HomeController", ["$scope", "$location", "authenticationSvc", "auth",function ($scope, $location, authenticationSvc, auth) {
-    $scope.userInfo = auth;
+	$scope.message = {
+			'm': 'welcome message'};
+	$scope.userInfo = auth;
 
     $scope.logout = function () {
 
         authenticationSvc.logout()
             .then(function (result) {
                 $scope.userInfo = null;
-                $location.path("/login");
+                $location.path("#");
             }, function (error) {
                 console.log(error);
             });
     };
 }]);
 
-app.controller('Home', function HomeController($scope){
+app.controller('Home', function HomeController($state,$scope){
 	$scope.message = {
 	'm': 'welcome message'};
+	
+	//document.write($state.current.name);
+	//document.write(v);
  });
  //define controller to fetch partner data
 app.controller('PartnerListController', ['$scope', '$http', function($scope, $http) {
