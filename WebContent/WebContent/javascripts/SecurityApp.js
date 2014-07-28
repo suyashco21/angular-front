@@ -220,7 +220,7 @@ app.factory("authenticationSvc", ["$http","$q","$window",function ($http, $q, $w
 
     function logout() {
         var deferred = $q.defer();
-        $http.post("http://localhost:3000/api/login", { access_token: userInfo.accessToken, userName: userInfo.userName })
+        $http.post("http://localhost:3000/api/logout", { access_token: userInfo.accessToken, userName: userInfo.userName })
         .then(function (result)
         //$http({
           //  method: "POST",
