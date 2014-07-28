@@ -1,0 +1,56 @@
+[
+  {
+    "id":"1",
+    "name":"Bank Of America",
+    "accountType":"Visa",
+    "status":"active"
+  },
+  {
+    "id":"2",
+    "name":"Wells Fargo",
+    "accountType":"Visa",
+    "status":"active"
+  },
+  {
+    "id":"3",
+    "name":"Bit coin",
+    "accountType":"Master",
+    "status":"active"
+  },
+  {
+    "id":"4",
+    "name":"Amex",
+    "accountType":"Amex",
+    "status":"active"
+  },
+  {
+    "id":"5",
+    "name":"First Partner",
+    "accountType":"Visa",
+    "status":"Inactive"
+  },
+  {
+    "id":"6",
+    "name":"Barclays",
+    "accountType":"Visa",
+    "status":"locked"
+  },
+  {
+    "id":"7",
+    "name":"HSBC",
+    "accountType":"Master",
+    "status":"active"
+  },
+  {
+    "id":"8",
+    "name":"Citi",
+    "accountType":"Visa",
+    "status":"active"
+  },
+  {
+    "id":"9",
+    "name":"Suntrust",
+    "accountType":"Visa",
+    "status":"expired"
+  }
+]

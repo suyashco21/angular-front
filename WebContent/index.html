@@ -1,0 +1,38 @@
+﻿<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Home Page</title>
+    
+      <link href="bootstrap.min.css" rel="stylesheet" type="text/css" >
+</head>
+<body class="container">
+    
+      <div  ng-app="securityApp"> 
+          <h2>Demonstrating Authentication in Angular JS</h2> 
+      <div  class="navbar">
+    <div class="navbar-inner" ng-show="$state.current.name === 'home'">
+      <a class="brand" href="#">SMS Portal</a>
+      <ul class="nav">
+        <li><a ui-sref="home">Home</a></li>
+		<li><a ui-sref="partner">Partner</a></li>
+		<li><a ui-sref="issuer">Issuer</a></li>
+		<li><a ui-sref="account">Account</a></li>
+        <li><a ui-sref="report">Report</a></li>
+      </ul>
+    </div>
+  </div>
+          
+        
+  <div class="row">
+    <div class="span12">	
+      <div class="well" ui-view></div>        
+    </div>
+  </div>         
+     </div>
+    
+    <script src="angular.min.js"></script>
+    <!--  <script src="angular-route.min.js"></script>-->
+    <script src="javascripts/SecurityApp.js"></script>
+    <script src="angular-ui-router.js"></script>
+</body>
+</html>
