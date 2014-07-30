@@ -1,0 +1,17 @@
+<br>
+<div >
+		<table id="partnerList" border="1">
+			<tr>
+			  <td>Partner Name</td>
+			  <td>Account Type</td> 
+			  <td>Account Status</td>
+			</tr>
+			<tr ng-repeat="partner in partners">
+			  <td>{{partner.name}}</td>
+			  <td>{{partner.accountType}}</td> 
+			  <td>{{partner.status}}</td>
+			</tr>
+		</table>
+</div>
+<br>
+<input type="button" onclick="tableToExcel('partnerList', 'Partner List')" value="Export to Excel">

@@ -26,7 +26,7 @@ app.config(function($stateProvider, $urlRouterProvider){
 		.state('home.partner', {
           url: "/partner",
           templateUrl: "templates/partners.html",
-			controller: "PartnerListController", resolve: {
+			 resolve: {
 	            auth: function ($q, authenticationSvc) {
 	                var userInfo = authenticationSvc.getUserInfo();
 	                if (userInfo) {
@@ -37,6 +37,17 @@ app.config(function($stateProvider, $urlRouterProvider){
 	            }
 	        }
       })
+		      .state('home.partner.option1', {
+		              url: "/search",
+		              templateUrl: "templates/partner.search.html",
+		              //controller: "PartnerSearchController"
+		          })
+					.state('home.partner.option2', {
+		              url: "/list",
+		              templateUrl: "templates/partner.list.html",
+		              controller: "PartnerListController"
+					})
+      
 		.state('home.issuer', {
           url: "/issuer",
           templateUrl: "templates/issuers.html",
@@ -51,6 +62,17 @@ app.config(function($stateProvider, $urlRouterProvider){
 	            }
 	        }
       })
+		      .state('home.issuer.option1', {
+		              url: "/search",
+		              templateUrl: "templates/issuer.search.html",
+		              //controller: "IssuerSearchController"
+		          })
+					.state('home.issuer.option2', {
+		              url: "/list",
+		              templateUrl: "templates/issuer.list.html",
+		              controller: "IssuerController"
+					})
+		      
       .state('home.account', {
           url: "/account",
           templateUrl: "templates/accounts.html" , resolve: {
