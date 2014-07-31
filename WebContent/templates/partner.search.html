@@ -1,0 +1,8 @@
+<div>
+	<form name="searchPartner" ng-submit="searchP();">
+		<label for"partnerID"> PartnerID </label><input type="text" style="width: 100px" id="partnerID" ng-model="partnerID"> 	<!--OR <br>
+		<label for"partnerName"> Partner Name </label><input type="text" style="width: 100px" id="partnerName" ng-model="partnerName">-->
+		<input id="searchPartner" type="submit" onclick="searchP('partnerID', 'Partner List')" value="Search">
+		<span>{{partnerID}}</span>
+	</form>
+</div> 

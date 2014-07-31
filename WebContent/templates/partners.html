@@ -1,14 +1,5 @@
-    <div >
-		<table border="1">
-			<tr>
-			  <td>Partner Name</td>
-			  <td>Account Type</td> 
-			  <td>Account Status</td>
-			</tr>
-			<tr ng-repeat="partner in partners">
-			  <td>{{partner.name}}</td>
-			  <td>{{partner.accountType}}</td> 
-			  <td>{{partner.status}}</td>
-			</tr>
-		</table>
-    </div> 
+<h1>Partner</h1>
+<hr/>
+<a ui-sref=".option1">Find Partner</a> | <a ui-sref=".option2">See all Partners</a> 
+<div ui-view></div>
+ 
